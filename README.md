@@ -65,3 +65,47 @@ A integração entre o hardware (ESP-32 e servo-motor), as plataformas de comuni
 
 - **APIs de clima e energia:** Garantem decisões automáticas baseadas em dados confiáveis de previsão do tempo e disponibilidade energética, evitando falhas e protegendo equipamentos.
 
+# Instruções de Funcionamento do Projeto de Janela Inteligente
+
+O sistema permite o fechamento da janela de duas formas: **manual** (via Telegram) e **automática** (com base em condições climáticas e nível de energia).
+
+---
+
+## 1. Funcionamento Manual (via Telegram)
+
+1. O usuário envia uma mensagem para o bot no Telegram com o comando desejado, como:
+   - `Fechar janela`
+   - `Abrir janela`
+   - `Status`
+
+2. O agente de IA (modelo da OpenAI) interpreta o comando enviado.
+
+3. O workflow no **n8n** é ativado automaticamente, processando o comando e validando:
+   - Se há energia suficiente para realizar a ação.
+
+4. Se tudo estiver OK, o n8n envia o comando para o **ESP-32** via rede.
+
+5. O **ESP-32** aciona o **servo-motor**, que movimenta a janela conforme solicitado.
+
+---
+
+## 2. Funcionamento Automático (baseado em condições climáticas)
+
+1. O workflow no **n8n** é configurado para ser executado periodicamente (ex: a cada 15 minutos).
+
+2. Durante a execução:
+   - O script em **Python** consulta a **API de clima** para verificar a previsão de chuva.
+   - A **API de verificação de energia** é chamada para garantir que o sistema possui energia suficiente.
+
+3. Se houver previsão de **chuva** e **energia disponível**, o n8n envia o comando ao ESP-32 para **fechar a janela automaticamente**.
+
+4. Se não houver risco ou energia suficiente, nenhuma ação é tomada.
+
+---
+
+## Observações
+
+- O controle manual tem prioridade: caso o usuário envie um comando, ele será executado independentemente das condições climáticas.
+- Todas as decisões automáticas são feitas com base em dados em tempo real, evitando acionamentos desnecessários ou falhas por falta de energia.
+- O sistema pode ser facilmente reconfigurado para ajustar frequência de checagem, limites de energia, ou comandos personalizados.
+
