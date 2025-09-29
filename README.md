@@ -48,3 +48,20 @@ O projeto de janela inteligente foi desenvolvido para automatizar o fechamento d
 ## Benefícios da Integração
 
 A integração entre o hardware (ESP-32 e servo-motor), as plataformas de comunicação (Telegram e IA), o workflow orquestrado pelo n8n e as APIs externas resulta em um sistema inteligente, capaz de responder rapidamente a mudanças ambientais e demandas do usuário, garantindo a proteção do ambiente e o uso eficiente de recursos energéticos.
+
+# Justificativas Técnicas do Projeto de Janela Inteligente
+
+- **ESP-32:** Microcontrolador com Wi-Fi e Bluetooth integrados, baixo consumo energético, ideal para IoT e controle de servo-motores.
+
+- **Servo-motor:** Permite controle preciso e silencioso da janela, com torque adequado para o movimento necessário.
+
+- **Telegram:** Plataforma de comunicação popular, segura e com API aberta, facilitando o controle remoto via bot.
+
+- **n8n:** Ferramenta low-code para orquestração do workflow, integra APIs e executa scripts Python com flexibilidade e facilidade de manutenção.
+
+- **Python:** Linguagem versátil para automação e integração com APIs, utilizada para implementar a lógica do sistema.
+
+- **Modelo OpenAI:** Fornece interpretação avançada dos comandos do usuário, melhorando a experiência de controle manual e a robustez do sistema.
+
+- **APIs de clima e energia:** Garantem decisões automáticas baseadas em dados confiáveis de previsão do tempo e disponibilidade energética, evitando falhas e protegendo equipamentos.
+
